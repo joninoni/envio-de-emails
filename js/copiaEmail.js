@@ -21,12 +21,15 @@ function leerCampo(e){//funcion que lee cada campo
       mostrarMensaje(`El campo ${campoId} es obligatorio`,referencia);//si no hay nada escrito se manda un mensaje
    }
    else{
-      console.log(e.target.value);
+
    }
 }
 function mostrarMensaje(mensaje,referencia){
-   const alerta=document.createElement("p");
-   alerta.textContent=mensaje
-   alerta.classList.add("bg-red-600","text-white","p-2","text-center");
-   referencia.appendChild(alerta);
+   const alerta=referencia.querySelector('.bg-red-600');
+   if (!alerta) {
+      const error=document.createElement("p");
+      error.textContent=mensaje
+      error.classList.add("bg-red-600","text-white","p-2","text-center");
+      referencia.appendChild(error);
+   }
 }
