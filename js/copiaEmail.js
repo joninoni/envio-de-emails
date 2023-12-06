@@ -5,6 +5,13 @@ const inputMensaje=document.querySelector("#mensaje");
 const btnEnviar=document.querySelector(`button[type="submit"]`);
 const btnReset=document.querySelector(`button[type="reset"]`);
 const formulario=document.querySelector("#formulario");
+//Objecto principal
+const email={
+   email:"",
+   asunto:"",
+   mensaje:"",
+}
+
 //Eventos
 document.addEventListener("DOMContentLoaded",()=>{
    inputEmail.addEventListener("blur",leerCampo)
@@ -25,7 +32,10 @@ function leerCampo(e){//funcion que lee cada campo
       mostrarMensaje(`El campo ${campoId} no es valido`,referencia);
       return;
    }
-   limpiarAlerta(referencia)
+   limpiarAlerta(referencia);
+
+   //Asigna lo escrito en el campo a el objecto principal
+   email[e.target.name]=e.target.value.trim().toLowerCase();
 }
 function mostrarMensaje(mensaje,referencia){ 
    limpiarAlerta(referencia);
