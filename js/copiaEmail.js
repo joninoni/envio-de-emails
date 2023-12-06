@@ -19,17 +19,20 @@ function leerCampo(e){//funcion que lee cada campo
    //verifica que se haya escrito algo
    if(e.target.value.trim()===""){
       mostrarMensaje(`El campo ${campoId} es obligatorio`,referencia);//si no hay nada escrito se manda un mensaje
+      return;
    }
-   else{
-
-   }
+   limpiarAlerta(referencia)
 }
-function mostrarMensaje(mensaje,referencia){
-   const alerta=referencia.querySelector('.bg-red-600');
-   if (!alerta) {
-      const error=document.createElement("p");
-      error.textContent=mensaje
-      error.classList.add("bg-red-600","text-white","p-2","text-center");
-      referencia.appendChild(error);
+function mostrarMensaje(mensaje,referencia){ 
+   limpiarAlerta(referencia);
+   const error=document.createElement("p");
+   error.textContent=mensaje
+   error.classList.add("bg-red-600","text-white","p-2","text-center");
+   referencia.appendChild(error);      
+}
+function limpiarAlerta(referencia){
+   const alerta=referencia.querySelector(".bg-red-600");
+   if(alerta){
+      alerta.remove();
    }
 }
