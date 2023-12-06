@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded",()=>{
    inputEmail.addEventListener("blur",leerCampo);
    inputAsunto.addEventListener("blur",leerCampo);
    inputMensaje.addEventListener("blur",leerCampo);
+   formulario.addEventListener('submit',enviarEmail);
    btnReset.addEventListener("click",(e)=>{
       e.preventDefault();
       email.email="";
@@ -26,7 +27,6 @@ document.addEventListener("DOMContentLoaded",()=>{
       comprobarEmail();
    })
 });
-
 //Funciones
 function leerCampo(e){//funcion que lee cada campo 
    const campoId=e.target.id;
@@ -70,10 +70,10 @@ function validarEmail(email){
 function comprobarEmail(){
    //habilita o desabilita el boton de enviar
    if(Object.values(email).includes('')){//es para que no haya campos vacios
-      btnEnviar.disabled=false;
+      btnEnviar.disabled=true;
       btnEnviar.classList.add("opacity-50");
       return;
    }
-   btnEnviar.disabled=true;
+   btnEnviar.disabled=false;
    btnEnviar.classList.remove("opacity-50");
 }
