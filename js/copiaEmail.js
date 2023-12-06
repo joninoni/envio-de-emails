@@ -26,16 +26,20 @@ function leerCampo(e){//funcion que lee cada campo
    //verifica que se haya escrito algo
    if(e.target.value.trim()===""){
       mostrarMensaje(`El campo ${campoId} es obligatorio`,referencia);//si no hay nada escrito se manda un mensaje
+      email[e.target.name]="";
+      comprobarEmail();
       return;
    }
    if(e.target.id ==="email" &&!validarEmail(e.target.value)){
       mostrarMensaje(`El campo ${campoId} no es valido`,referencia);
+      email[e.target.name]="";
+      comprobarEmail();
       return;
    }
    limpiarAlerta(referencia);
-
    //Asigna lo escrito en el campo a el objecto principal
    email[e.target.name]=e.target.value.trim().toLowerCase();
+   comprobarEmail();
 }
 function mostrarMensaje(mensaje,referencia){ 
    limpiarAlerta(referencia);
@@ -54,4 +58,14 @@ function validarEmail(email){
    const regex =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/ ;
    const resultado=regex.test(email);
    return resultado;
+}
+function comprobarEmail(){
+   //habilita o desabilita el boton de enviar
+   if(Object.values(email).includes('')){//es para que no haya campos vacios
+      btnEnviar.disabled=false;
+      btnEnviar.classList.add("opacity-50");
+      return;
+   }
+   btnEnviar.disabled=true;
+   btnEnviar.classList.remove("opacity-50");
 }
