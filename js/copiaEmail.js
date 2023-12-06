@@ -14,9 +14,17 @@ const email={
 
 //Eventos
 document.addEventListener("DOMContentLoaded",()=>{
-   inputEmail.addEventListener("blur",leerCampo)
-   inputAsunto.addEventListener("blur",leerCampo)
-   inputMensaje.addEventListener("blur",leerCampo)
+   inputEmail.addEventListener("blur",leerCampo);
+   inputAsunto.addEventListener("blur",leerCampo);
+   inputMensaje.addEventListener("blur",leerCampo);
+   btnReset.addEventListener("click",(e)=>{
+      e.preventDefault();
+      email.email="";
+      email.asunto="";
+      email.mensaje="";
+      formulario.reset();
+      comprobarEmail();
+   })
 });
 
 //Funciones
