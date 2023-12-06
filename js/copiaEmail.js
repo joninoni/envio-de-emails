@@ -21,6 +21,10 @@ function leerCampo(e){//funcion que lee cada campo
       mostrarMensaje(`El campo ${campoId} es obligatorio`,referencia);//si no hay nada escrito se manda un mensaje
       return;
    }
+   if(e.target.id ==="email" &&!validarEmail(e.target.value)){
+      mostrarMensaje(`El campo ${campoId} no es valido`,referencia);
+      return;
+   }
    limpiarAlerta(referencia)
 }
 function mostrarMensaje(mensaje,referencia){ 
@@ -35,4 +39,9 @@ function limpiarAlerta(referencia){
    if(alerta){
       alerta.remove();
    }
+}
+function validarEmail(email){
+   const regex =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/ ;
+   const resultado=regex.test(email);
+   return resultado;
 }
