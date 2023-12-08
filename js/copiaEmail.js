@@ -5,6 +5,7 @@ const inputMensaje=document.querySelector("#mensaje");
 const btnEnviar=document.querySelector(`button[type="submit"]`);
 const btnReset=document.querySelector(`button[type="reset"]`);
 const formulario=document.querySelector("#formulario");
+const spinner=document.querySelector("#spinner");
 //Objecto principal
 const email={
    email:"",
@@ -20,13 +21,27 @@ document.addEventListener("DOMContentLoaded",()=>{
    formulario.addEventListener('submit',enviarEmail);
    btnReset.addEventListener("click",(e)=>{
       e.preventDefault();
-      email.email="";
-      email.asunto="";
-      email.mensaje="";
-      formulario.reset();
-      comprobarEmail();
+      restearFormulario();
    })
 });
+function enviarEmail(e){
+   e.preventDefault();
+   spinner.classList.add("flex");
+   spinner.classList.remove("hidden");
+   setTimeout(() => {
+      spinner.classList.add("hidden");
+      spinner.classList.remove("flex");
+      restearFormulario();
+      const mensajeExito=document.createElement("p");
+      mensajeExito.textContent='mensaje enviado correctamente';
+      mensajeExito.classList.add("bg-green-500","p-2","text-white","text-center","rounded-lg","mt-10","font-bold","text-sm","uppercase");
+      formulario.appendChild(mensajeExito);
+      setTimeout(() => {
+         mensajeExito.remove();
+      }, 3000);
+   }, 3000);
+    
+}
 //Funciones
 function leerCampo(e){//funcion que lee cada campo 
    const campoId=e.target.id;
@@ -76,4 +91,11 @@ function comprobarEmail(){
    }
    btnEnviar.disabled=false;
    btnEnviar.classList.remove("opacity-50");
+}
+function restearFormulario(){
+      email.email="";
+      email.asunto="";
+      email.mensaje="";
+      formulario.reset();
+      comprobarEmail();
 }
